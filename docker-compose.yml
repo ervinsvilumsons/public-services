@@ -1,6 +1,50 @@
 services:
+  portainer:
+    image: "portainer/portainer-ce:${PORTAINER_VERSION}"
+    restart: unless-stopped
+    ports:
+      - "${PORTAINER_PORT}:${PORTAINER_PORT}"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-data:/data
+    networks:
+      - public-services
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - "${PROMETHEUS_PORT}:${PROMETHEUS_PORT}"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    networks:
+      - public-services
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "${GRAFANA_PORT}:${GRAFANA_PORT}"
+    depends_on:
+      - prometheus
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - public-services
+
+  mailhog:
+    image: "mailhog/mailhog:${MAILHOG_VERSION}"
+    container_name: mailhog
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${MAILHOG_WEB_PORT}:${MAILHOG_WEB_PORT}" # Web UI
+      - "${MAILHOG_SMTP_PORT}:${MAILHOG_SMTP_PORT}" # SMTP
+    networks:
+      - public-services
+
   mysql:
-    image: mysql:${MYSQL_VERSION}
+    image: "mysql:${MYSQL_VERSION}"
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
@@ -15,8 +59,9 @@ services:
       retries: 30
     networks:
       - public-services
+
   postgres:
-    image: postgres:${POSTGRES_VERSION}
+    image: "postgres:${POSTGRES_VERSION}"
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_USER: ${DB_USER}
@@ -32,8 +77,9 @@ services:
       retries: 30
     networks:
       - public-services
+
   redis:
-    image: redis:${REDIS_VERSION}
+    image: "redis:${REDIS_VERSION}"
     ports:
       - "${REDIS_PORT}:${REDIS_PORT}"
     volumes:
@@ -41,7 +87,21 @@ services:
     networks:
       - public-services
 
+  redis-commander:
+    image: "rediscommander/redis-commander:${REDIS_COMMANDER_VERSION}"
+    environment:
+      - REDIS_HOSTS=local:redis:${REDIS_PORT}
+    ports:
+      - "${REDIS_COMMANDER_PORT}:${REDIS_COMMANDER_PORT}"
+    depends_on:
+      - redis
+    networks:
+      - public-services
+
 volumes:
+  portainer-data:
+  grafana-data:
+  prometheus-data:
   mysql-data:
   postgres-data:
   redis-data:

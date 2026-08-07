@@ -2,16 +2,31 @@
 
 This project provides a simple Docker Compose setup for running public services locally.
 
-## What is included
+## Requirements
 
-- MySQL service named `mysql`
-- PostgreSQL service named `postgres`
-- Redis service named `redis`
-- Persistent Docker volumes for all services
-- A shared Docker network named `public-services`
-- An initialization script for MySQL databases and users
+- Docker
 
 ## Services
+
+- Portainer
+  - Image: `portainer/portainer-ce:${PORTAINER_VERSION}`
+  - Default port: `${PORTAINER_PORT}`
+  - Data persisted in the `portainer-data` volume
+
+- Prometheus
+  - Image: `prom/prometheus`
+  - Default port: `${PROMETHEUS_PORT}`
+  - Data persisted in the `prometheus-data` volume
+
+- Grafana
+  - Image: `grafana/grafana`
+  - Default port: `${GRAFANA_PORT}`
+  - Data persisted in the `grafana-data` volume
+
+- Mailhog
+  - Image: `mailhog/mailhog:${MAILHOG_VERSION}`
+  - WEB port: `${MAILHOG_WEB_PORT}`
+  - SMTP port: `${MAILHOG_SMTP_PORT}`
 
 - MySQL
   - Image: `mysql:${MYSQL_VERSION}`
@@ -30,6 +45,6 @@ This project provides a simple Docker Compose setup for running public services 
   - Default port: `${REDIS_PORT}`
   - Data persisted in the `redis-data` volume
 
-## Requirements
-
-- Docker
+- Redis Commander
+  - Image: `rediscommander/redis-commander:${REDIS_COMMANDER_VERSION}`
+  - Default port: `${REDIS_COMMANDER_PORT}`
