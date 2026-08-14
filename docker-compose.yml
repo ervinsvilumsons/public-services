@@ -1,6 +1,7 @@
 services:
   portainer:
     image: "portainer/portainer-ce:${PORTAINER_VERSION}"
+    container_name: portainer
     restart: unless-stopped
     ports:
       - "${PORTAINER_PORT}:${PORTAINER_PORT}"
@@ -45,6 +46,7 @@ services:
 
   mysql:
     image: "mysql:${MYSQL_VERSION}"
+    container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
@@ -60,8 +62,23 @@ services:
     networks:
       - public-services
 
+  nginx-proxy-manager:
+    image: "jc21/nginx-proxy-manager:${NGINX_PROXY_MANAGER_VERSION}"
+    container_name: nginx-proxy-manager
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "81:81"
+      - "443:443"
+    volumes:
+      - nginx-proxy-manager-data:/data
+      - nginx-proxy-manager-letsencrypt:/etc/letsencrypt
+    networks:
+      - public-services
+
   postgres:
     image: "postgres:${POSTGRES_VERSION}"
+    container_name: postgres
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_USER: ${DB_USER}
@@ -80,6 +97,7 @@ services:
 
   redis:
     image: "redis:${REDIS_VERSION}"
+    container_name: redis
     ports:
       - "${REDIS_PORT}:${REDIS_PORT}"
     volumes:
@@ -89,6 +107,7 @@ services:
 
   redis-commander:
     image: "rediscommander/redis-commander:${REDIS_COMMANDER_VERSION}"
+    container_name: redis-commander
     environment:
       - REDIS_HOSTS=local:redis:${REDIS_PORT}
     ports:
@@ -102,6 +121,8 @@ volumes:
   portainer-data:
   grafana-data:
   prometheus-data:
+  nginx-proxy-manager-data:
+  nginx-proxy-manager-letsencrypt:
   mysql-data:
   postgres-data:
   redis-data:
