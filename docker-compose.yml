@@ -43,6 +43,21 @@ services:
       - "${MAILHOG_SMTP_PORT}:${MAILHOG_SMTP_PORT}" # SMTP
     networks:
       - public-services
+  minio:
+    image: "quay.io/minio/minio:${MINIO_VERSION}"
+    container_name: minio
+    restart: unless-stopped
+    ports:
+      - "${MINIO_PORT}:9000"
+      - "${MINIO_CONSOLE_PORT}:9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - minio-data:/data
+    command: server /data --console-address ":9001"
+    networks:
+      - public-services
 
   mysql:
     image: "mysql:${MYSQL_VERSION}"
@@ -73,6 +88,23 @@ services:
     volumes:
       - nginx-proxy-manager-data:/data
       - nginx-proxy-manager-letsencrypt:/etc/letsencrypt
+    networks:
+      - public-services
+
+  ngrok:
+    image: "ngrok/ngrok:${NGROK_VERSION}"
+    container_name: ngrok
+    restart: unless-stopped
+    command:
+      - http
+      - --url=${NGROK_URL}
+      - nginx-proxy-manager:80
+    environment:
+      NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
+    depends_on:
+      - nginx-proxy-manager
+    ports:
+      - "${NGROK_PORT}:${NGROK_PORT}"
     networks:
       - public-services
 
@@ -123,6 +155,7 @@ volumes:
   prometheus-data:
   nginx-proxy-manager-data:
   nginx-proxy-manager-letsencrypt:
+  minio-data:
   mysql-data:
   postgres-data:
   redis-data:
