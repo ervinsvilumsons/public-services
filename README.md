@@ -73,7 +73,7 @@ This project provides a simple Docker Compose setup for running public services 
 </details>
 
 <details>
-<summary><strong>Ngrok</strong></summary>
+<summary><strong>ngrok</strong></summary>
 
   - Image: `ngrok/ngrok:${NGROK_VERSION}`
   - Default port: `${NGROK_PORT}`
@@ -203,57 +203,6 @@ Nginx Proxy Manager allows you to easily reverse proxy to your other services an
 
 </details>
 
-## 🚀 Setup Instructions for Ngrok
-
-Ngrok provides secure tunneling to expose your local services to the internet.
-
-<details>
-<summary><strong>Instructions</strong></summary>
-
-### Prerequisites
-
-1. **Create an Ngrok Account:**
-   - Go to [https://ngrok.com](https://ngrok.com)
-   - Sign up for a free account
-   - Verify your email address
-
-2. **Get Your Auth Token:**
-   - Log in to your ngrok dashboard
-   - Go to **Getting started** > **Your Authtoken**
-   - Copy your authentication token
-
-3. **Reserve a Static Domain (Optional but recommended):**
-   - In the ngrok dashboard, go to **Network** > **Domains**
-   - Click **New Domain** to reserve a static domain
-   - You'll get a URL like `https://your-domain.ngrok.io`
-
-### Configuration
-
-1. **Update your `.env` file:**
-   ```bash
-   NGROK_AUTHTOKEN=your_auth_token_here
-   NGROK_URL=your-domain.ngrok.io
-   ```
-   - Replace `your_auth_token_here` with your ngrok authentication token
-   - Replace `your-domain.ngrok.io` with your reserved domain (or ngrok will assign a random URL)
-
-2. **Start the services:**
-   ```bash
-   make build
-   ```
-
-3. **Access your services:**
-   - Once running, ngrok will expose your services at: `https://your-domain.ngrok.io`
-   - Check the ngrok status at the local inspector: `http://localhost:${NGROK_PORT}`
-
-4. **Usage Notes:**
-   - Ngrok creates a secure tunnel from your local Nginx Proxy Manager to the internet
-   - All traffic is encrypted with HTTPS
-   - Share your ngrok URL with others to allow external access to your local services
-   - Use the ngrok inspector at `http://localhost:${NGROK_PORT}` to monitor all tunnel traffic
-
-</details>
-
 ## 📦 Getting Started
 
 1. Clone or download this project
@@ -318,6 +267,8 @@ Ngrok provides secure tunneling to expose your local services to the internet.
 
 ## 📈 k6 Load Testing
 
+k6 provides load and performance testing for web applications by simulating virtual users and measuring request rates, response times, failures, and test thresholds.
+
 <details>
 <summary><strong>Instructions</strong></summary>
 
@@ -347,6 +298,57 @@ K6_TARGET_PATH=/some-page/
 ```
 
 By default, the test uses a closed workload with `K6_TEST_VUS` virtual users for `K6_TEST_DURATION`. Set `K6_RPS` above zero to use a constant arrival rate instead; `K6_MAX_VUS` limits the number of virtual users k6 may allocate for that rate.
+
+</details>
+
+## 🚀 Setup ngrok
+
+ngrok provides secure tunneling to expose your local services to the internet.
+
+<details>
+<summary><strong>Instructions</strong></summary>
+
+### Prerequisites
+
+1. **Create an Ngrok Account:**
+   - Go to [https://ngrok.com](https://ngrok.com)
+   - Sign up for a free account
+   - Verify your email address
+
+2. **Get Your Auth Token:**
+   - Log in to your ngrok dashboard
+   - Go to **Getting started** > **Your Authtoken**
+   - Copy your authentication token
+
+3. **Reserve a Static Domain (Optional but recommended):**
+   - In the ngrok dashboard, go to **Network** > **Domains**
+   - Click **New Domain** to reserve a static domain
+   - You'll get a URL like `https://your-domain.ngrok.io`
+
+### Configuration
+
+1. **Update your `.env` file:**
+   ```bash
+   NGROK_AUTHTOKEN=your_auth_token_here
+   NGROK_URL=your-domain.ngrok.io
+   ```
+   - Replace `your_auth_token_here` with your ngrok authentication token
+   - Replace `your-domain.ngrok.io` with your reserved domain (or ngrok will assign a random URL)
+
+2. **Start the services:**
+   ```bash
+   make build
+   ```
+
+3. **Access your services:**
+   - Once running, ngrok will expose your services at: `https://your-domain.ngrok.io`
+   - Check the ngrok status at the local inspector: `http://localhost:${NGROK_PORT}`
+
+4. **Usage Notes:**
+   - Ngrok creates a secure tunnel from your local Nginx Proxy Manager to the internet
+   - All traffic is encrypted with HTTPS
+   - Share your ngrok URL with others to allow external access to your local services
+   - Use the ngrok inspector at `http://localhost:${NGROK_PORT}` to monitor all tunnel traffic
 
 </details>
 
