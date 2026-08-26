@@ -28,7 +28,7 @@ This project provides a simple Docker Compose setup for running public services 
 </details>
 
 <details>
-<summary><strong>Mailhog</strong></summary>
+<summary><strong>MailHog</strong></summary>
 
   - Image: `mailhog/mailhog:${MAILHOG_VERSION}`
   - WEB port: `${MAILHOG_WEB_PORT}`
@@ -38,7 +38,7 @@ This project provides a simple Docker Compose setup for running public services 
 </details>
 
 <details>
-<summary><strong>Minio</strong></summary>
+<summary><strong>MinIO</strong></summary>
 
   - Image: `quay.io/minio/minio:${MINIO_VERSION}`
   - Default port: `${MINIO_PORT}`
