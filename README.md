@@ -1,75 +1,139 @@
+[![Docker](https://img.shields.io/badge/Docker-required-2496ED?logo=docker&logoColor=white)](https://docs.docker.com/get-docker/)
+[![Docker Compose](https://img.shields.io/badge/Docker%20Compose-%3E%3D2-2496ED?logo=docker&logoColor=white)](https://docs.docker.com/compose/)
+[![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18.18.0-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![License](https://poser.pugx.org/captainhook/captainhook/license.svg?v=1)](https://packagist.org/packages/captainhook/captainhook)
+
 # Public Services
 
 This project provides a simple Docker Compose setup for running public services locally.
 
-## Requirements
+## 🧩 Services
 
-- Docker
+<details>
+<summary><strong>Grafana</strong></summary>
 
-## Services
-
-- Grafana
   - Image: `grafana/grafana`
   - Default port: `${GRAFANA_PORT}`
   - Data persisted in the `grafana-data` volume
+  - [Read More](https://grafana.com/docs/)
 
-- Mailhog
+</details>
+
+<details>
+<summary><strong>k6</strong></summary>
+
+  - Image: `grafana/k6`
+  - [Read More](https://grafana.com/docs/k6/latest/)
+
+</details>
+
+<details>
+<summary><strong>Mailhog</strong></summary>
+
   - Image: `mailhog/mailhog:${MAILHOG_VERSION}`
   - WEB port: `${MAILHOG_WEB_PORT}`
   - SMTP port: `${MAILHOG_SMTP_PORT}`
+  - [Read More](https://mailtrap.io/blog/mailhog-explained/)
 
-- Minio
+</details>
+
+<details>
+<summary><strong>Minio</strong></summary>
+
   - Image: `quay.io/minio/minio:${MINIO_VERSION}`
   - Default port: `${MINIO_PORT}`
   - Console port: `${MINIO_CONSOLE_PORT}`
   - Data persisted in the `minio-data` volume
+  - [Read More](https://hub.docker.com/r/minio/minio)
 
-- MySQL
+</details>
+
+<details>
+<summary><strong>MySQL</strong></summary>
+
   - Image: `mysql:${MYSQL_VERSION}`
   - Default port: `${MYSQL_PORT}`
   - Data persisted in the `mysql-data` volume
   - Initialization SQL is loaded from the `docker/mysql` directory
+  - [Read More](https://dev.mysql.com/doc/)
 
-- Nginx Proxy Manager
+</details>
+
+<details>
+<summary><strong>Nginx Proxy Manager</strong></summary>
+
   - Image: `jc21/nginx-proxy-manager:${NGINX_PROXY_MANAGER_VERSION}`
   - Admin panel port: `${NGINX_PROXY_MANAGER_PORT}`
   - HTTP port: `80`
   - HTTPS port: `443`
   - Data persisted in the `nginx-proxy-manager-data` volume
   - Encryption persisted in the `nginx-proxy-manager-letsencrypt` volume
+  - [Read More](https://nginxproxymanager.com/guide/)
 
-- Ngrok
+</details>
+
+<details>
+<summary><strong>Ngrok</strong></summary>
+
   - Image: `ngrok/ngrok:${NGROK_VERSION}`
   - Default port: `${NGROK_PORT}`
   - Auth Token: `${NGROK_AUTHTOKEN}`
   - URL: `${NGROK_URL}`
+  - [Read More](https://ngrok.com/docs/start)
 
-- Portainer
+</details>
+
+<details>
+<summary><strong>Portainer</strong></summary>
+
   - Image: `portainer/portainer-ce:${PORTAINER_VERSION}`
   - Default port: `${PORTAINER_PORT}`
   - Data persisted in the `portainer-data` volume
+  - [Read More](https://docs.portainer.io/)
 
-- PostgreSQL
+</details>
+
+<details>
+<summary><strong>PostgreSQL</strong></summary>
+
   - Image: `postgres:${POSTGRES_VERSION}`
   - Default port: `${POSTGRES_PORT}`
   - Data persisted in the `postgres-data` volume
   - Initialization SQL is loaded from the `docker/postgres` directory
+  - [Read More](https://www.postgresql.org/docs/)
 
-- Prometheus
+</details>
+
+<details>
+<summary><strong>Prometheus</strong></summary>
+
   - Image: `prom/prometheus`
   - Default port: `${PROMETHEUS_PORT}`
   - Data persisted in the `prometheus-data` volume
+  - [Read More](https://prometheus.io/docs/prometheus/latest/getting_started/)
 
-- Redis
+</details>
+
+<details>
+<summary><strong>Redis</strong></summary>
+
   - Image: `redis:${REDIS_VERSION}`
   - Default port: `${REDIS_PORT}`
   - Data persisted in the `redis-data` volume
+  - [Read More](https://redis.io/docs/latest/)
 
-- Redis Commander
+</details>
+
+<details>
+<summary><strong>Redis Commander</strong></summary>
+
   - Image: `rediscommander/redis-commander:${REDIS_COMMANDER_VERSION}`
   - Default port: `${REDIS_COMMANDER_PORT}`
+  - [Read More](https://github.com/joeferner/redis-commander)
 
-## Setup Instructions for Nginx Proxy Manager
+</details>
+
+## 🚀 Setup Instructions for Nginx Proxy Manager
 
 Nginx Proxy Manager allows you to easily reverse proxy to your other services and manage SSL certificates. Follow the instructions below for your operating system.
 
@@ -139,12 +203,12 @@ Nginx Proxy Manager allows you to easily reverse proxy to your other services an
 
 </details>
 
-## Setup Instructions for Ngrok
+## 🚀 Setup Instructions for Ngrok
 
 Ngrok provides secure tunneling to expose your local services to the internet.
 
 <details>
-<summary><strong>Ngrok Setup Instructions</strong></summary>
+<summary><strong>Instructions</strong></summary>
 
 ### Prerequisites
 
@@ -190,20 +254,101 @@ Ngrok provides secure tunneling to expose your local services to the internet.
 
 </details>
 
-## Getting Started
+## 📦 Getting Started
 
 1. Clone or download this project
-2. Create a `.env` file based on your needs (optional, uses defaults if not provided)
-3. Manage your servies with `STACK=`
-4. Run `make build` to start all services
+    ```bash
+    git clone git@github.com:ervinsvilumsons/public-services.git
+    ```
+
+2. Create a `.env` file from `.env.example` and adjust the values as needed:
+    ```bash
+    cp .env.example .env
+    ```
+
+3. Manage your services with `STACK=`
+4. Start your stacked services
+    ```bash
+    make build
+    ```
 5. Access services through Nginx Proxy Manager at `http://localhost:${NGINX_PROXY_MANAGER_PORT}` or directly via their configured ports
 
-## Available Make Commands
+## 🧱 Add Custom Services
 
-You can use the included Makefile to simplify common operations:
+<details>
+<summary><strong>Instructions</strong></summary>
 
-- `make build` - Build and start all services in the background
-- `make up` - Start all services in the background
-- `make down` - Stop and remove all services
-- `make restart` - Restart all services (stop and start)
-- `make show` - Display the configured services list
+1. You can extend the default stack without editing `docker-compose.yml`. Create a local `docker-compose.override.yml` file in the project root:
+
+    ```yaml
+    services:
+      adminer:
+        image: adminer:latest
+        container_name: adminer
+        restart: unless-stopped
+        ports:
+          - "8080:8080"
+        networks:
+          - public-services
+
+    networks:
+      public-services:
+        name: public-services
+    ```
+
+2. Docker Compose automatically merges `docker-compose.override.yml` with `docker-compose.yml`. Keep the override file local if it contains personal services or configuration. To verify the merged configuration, run:
+
+    ```bash
+    docker compose config
+    ```
+
+3. Add the service name to `STACK` in `.env` so it is started by the Makefile commands:
+
+    ```dotenv
+    STACK="portainer prometheus grafana adminer"
+    ```
+
+    or run it manually: 
+
+    ```bash
+    make build adminer
+    ```
+
+</details>
+
+## 📈 k6 Load Testing
+
+<details>
+<summary><strong>Instructions</strong></summary>
+
+The k6 service sends requests through the `nginx-proxy-manager` container. Before running a test, create a Proxy Host for the target domain and make sure it forwards to the application. `K6_TARGET_URL` must match that domain, including the `http://` or `https://` scheme.
+
+Create or update `.env`:
+
+```dotenv
+K6_TARGET_URL=http://example.local
+K6_CHECK_SITEMAP=true
+K6_MAX_REDIRECTS=5
+```
+
+With `K6_CHECK_SITEMAP=true`, k6 downloads `/sitemap.xml` once during `setup()`, follows sitemap redirects such as `/sitemap.xml` to `/wp-sitemap.xml`, and uses the discovered page URLs for the test. Keep `K6_MAX_REDIRECTS` greater than zero; an empty value is treated as `0` and prevents redirects from being followed.
+
+Run the test with:
+
+```bash
+make k6-test
+```
+
+To test one path without reading a sitemap, use `K6_CHECK_SITEMAP=false` and set `K6_TARGET_PATH`:
+
+```dotenv
+K6_CHECK_SITEMAP=false
+K6_TARGET_PATH=/some-page/
+```
+
+By default, the test uses a closed workload with `K6_TEST_VUS` virtual users for `K6_TEST_DURATION`. Set `K6_RPS` above zero to use a constant arrival rate instead; `K6_MAX_VUS` limits the number of virtual users k6 may allocate for that rate.
+
+</details>
+
+## ⚖️ License
+[MIT](https://choosealicense.com/licenses/mit/)

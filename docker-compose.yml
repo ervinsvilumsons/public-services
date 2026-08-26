@@ -34,6 +34,27 @@ services:
     networks:
       - public-services
 
+  k6:
+    image: grafana/k6
+    container_name: k6
+    environment:
+      K6_TARGET_URL: ${K6_TARGET_URL}
+      K6_TARGET_PATH: ${K6_TARGET_PATH}
+      K6_CHECK_SITEMAP: ${K6_CHECK_SITEMAP}
+      K6_TAG_ENDPOINTS: ${K6_TAG_ENDPOINTS}
+      K6_TEST_VUS: ${K6_TEST_VUS}
+      K6_MAX_VUS: ${K6_MAX_VUS}
+      K6_TEST_DURATION: ${K6_TEST_DURATION}
+      K6_RPS: ${K6_RPS}
+      K6_MAX_REDIRECTS: ${K6_MAX_REDIRECTS}
+      K6_SLEEP_SECONDS: ${K6_SLEEP_SECONDS}
+    depends_on:
+      - nginx-proxy-manager
+    volumes:
+      - ./tests:/tests
+    networks:
+      - public-services
+
   mailhog:
     image: "mailhog/mailhog:${MAILHOG_VERSION}"
     container_name: mailhog
