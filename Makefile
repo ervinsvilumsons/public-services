@@ -1,7 +1,7 @@
 include .env
 
 COMPOSE := docker compose
-COMMANDS := help build up down restart k6-test self-lint self-prettier
+COMMANDS := help build up down restart k6-test check quality format
 ARGUMENTS := $(filter-out $(COMMANDS),$(MAKECMDGOALS))
 SERVICES := $(if $(ARGUMENTS),$(ARGUMENTS),$(subst ",,$(STACK)))
 
@@ -32,10 +32,14 @@ restart:
 k6-test:
 	$(COMPOSE) run --rm k6 run /tests/k6.js
 
-self-lint:
-	npx eslint tests/
+check:
+	npx eslint tests/  --max-warnings=0
+	npx prettier tests/  --check
 
-self-prettier:
+quality:
+	npx eslint tests/ --fix
+
+format:
 	npx prettier tests/  --write
 
 %:
