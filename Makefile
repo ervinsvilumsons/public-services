@@ -33,6 +33,7 @@ k6-test:
 	$(COMPOSE) run --rm k6 run /tests/k6.js
 
 check:
+	npm audit --audit-level=high
 	npx eslint tests/  --max-warnings=0
 	npx prettier tests/  --check
 
