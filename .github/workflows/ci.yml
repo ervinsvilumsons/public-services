@@ -9,7 +9,7 @@ on:
       - staging
 
 jobs:
-  tests:
+  quality-check:
     runs-on: ubuntu-latest
 
     env:
@@ -29,6 +29,6 @@ jobs:
         run: |
           npm ci
 
-      - name: Npm lint and format
+      - name: Npm audit, lint and format
         run: |
           make check
