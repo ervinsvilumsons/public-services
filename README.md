@@ -1,6 +1,7 @@
 # Public Services
 
-[![Docker](https://img.shields.io/badge/Docker-required-2496ED?logo=docker&logoColor=white)](https://docs.docker.com/get-docker/)
+[![Docker](https://img.shields.io/badge/Docker-required-2496ED?logo=docker&logoColor=white)](https://docs.docker.com/get-docker/)[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fervinsvilumsons%2Fpublic-services.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fervinsvilumsons%2Fpublic-services?ref=badge_shield)
+
 [![Docker Compose](https://img.shields.io/badge/Docker%20Compose-%3E%3D2-2496ED?logo=docker&logoColor=white)](https://docs.docker.com/compose/)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18.18.0-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![License](https://poser.pugx.org/captainhook/captainhook/license.svg?v=1)](https://packagist.org/packages/captainhook/captainhook)
@@ -354,3 +355,5 @@ ngrok provides secure tunneling to expose your local services to the internet.
 
 ## ⚖️ License
 [MIT](LICENSE)
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fervinsvilumsons%2Fpublic-services.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fervinsvilumsons%2Fpublic-services?ref=badge_large)
