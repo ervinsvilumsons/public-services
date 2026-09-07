@@ -3,7 +3,7 @@
 [![Docker](https://img.shields.io/badge/Docker-required-2496ED?logo=docker&logoColor=white)](https://docs.docker.com/get-docker/)
 [![Docker Compose](https://img.shields.io/badge/Docker%20Compose-%3E%3D2-2496ED?logo=docker&logoColor=white)](https://docs.docker.com/compose/)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18.18.0-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
-[![License](https://poser.pugx.org/captainhook/captainhook/license.svg?v=1)](https://packagist.org/packages/captainhook/captainhook)
+[![License](https://img.shields.io/github/license/ervinsvilumsons/public-services)](https://github.com/ervinsvilumsons/public-services/blob/main/LICENSE)
 
 This project provides a simple Docker Compose setup for running public services locally.
 
@@ -353,4 +353,4 @@ ngrok provides secure tunneling to expose your local services to the internet.
 </details>
 
 ## ⚖️ License
-[MIT](LICENSE)
+Public Services is released under the [MIT License](LICENSE).
