@@ -187,6 +187,7 @@ Nginx Proxy Manager allows you to easily reverse proxy to your other services an
      127.0.0.1   portainer.local
      127.0.0.1   prometheus.local
      127.0.0.1   redis-commander.local
+     127.0.0.1   s3-minio.local
      ```
    - Save the file (Ctrl+O, Enter, Ctrl+X)
 
