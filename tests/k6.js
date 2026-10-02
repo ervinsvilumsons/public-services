@@ -363,6 +363,26 @@ function decodeXmlEntities(value) {
 }
 
 /**
+ * Returns a cryptographically secure random index.
+ * Uses rejection sampling to avoid modulo bias.
+ */
+function secureRandomIndex(length) {
+  if (!Number.isInteger(length) || length <= 0) {
+    throw new Error("length must be a positive integer");
+  }
+
+  const max = 0x100000000; // 2^32
+  const limit = max - (max % length);
+  const values = new Uint32Array(1);
+
+  do {
+    crypto.getRandomValues(values);
+  } while (values[0] >= limit);
+
+  return values[0] % length;
+}
+
+/**
  * Validate configuration and discover the read-only URL dataset once.
  */
 export function setup() {
@@ -388,7 +408,7 @@ export default function (data) {
     return;
   }
 
-  const path = data.urls[Math.floor(Math.random() * data.urls.length)];
+  const path = data.urls[secureRandomIndex(data.urls.length)];
 
   const response = getRequest(path);
 

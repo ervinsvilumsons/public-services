@@ -3,6 +3,7 @@
 [![Docker](https://img.shields.io/badge/Docker-required-2496ED?logo=docker&logoColor=white)](https://docs.docker.com/get-docker/)
 [![Docker Compose](https://img.shields.io/badge/Docker%20Compose-%3E%3D2-2496ED?logo=docker&logoColor=white)](https://docs.docker.com/compose/)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18.18.0-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Quality](https://sonarcloud.io/api/project_badges/measure?project=ervinsvilumsons_public-services&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ervinsvilumsons_public-services)
 [![License](https://img.shields.io/github/license/ervinsvilumsons/public-services)](https://github.com/ervinsvilumsons/public-services/blob/main/LICENSE)
 
 This project provides a simple Docker Compose setup for running public services locally.
