@@ -52,14 +52,23 @@ const SLEEP_SECONDS = numberAtLeast(
   0,
 );
 
+/**
+ * Trim trailing slashes from a URL string.
+ */
+const trimTrailingSlashes = (url) => {
+  let end = url.length;
+  while (end > 0 && url[end - 1] === "/") end--;
+  return url.slice(0, end);
+};
+
 const RESPONSE_OK = 200;
 const SITEMAP = "/sitemap.xml";
 const redirectLimitExceeded = new Counter("redirect_limit_exceeded");
 const sitemapSetupFailures = new Counter("sitemap_setup_failures");
 const pageFailures = new Counter("page_failures");
 
-const siteUrl = TARGET_URL ? TARGET_URL.trim().replace(/\/+$/, "") : "";
-const requestBaseUrl = PROXY_MANAGER.replace(/\/+$/, "");
+const siteUrl = TARGET_URL ? trimTrailingSlashes(TARGET_URL.trim()) : "";
+const requestBaseUrl = trimTrailingSlashes(PROXY_MANAGER);
 let target;
 let targetError;
 
