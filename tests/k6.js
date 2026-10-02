@@ -368,7 +368,7 @@ function decodeXmlEntities(value) {
  */
 function secureRandomIndex(length) {
   if (!Number.isInteger(length) || length <= 0) {
-    throw new Error('length must be a positive integer');
+    throw new Error("length must be a positive integer");
   }
 
   const max = 0x100000000; // 2^32
